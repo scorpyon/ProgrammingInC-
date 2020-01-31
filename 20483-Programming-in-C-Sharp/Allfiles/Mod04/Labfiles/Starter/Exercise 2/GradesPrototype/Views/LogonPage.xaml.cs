@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GradesPrototype.Data;
+using GradesPrototype42.Data;
 using GradesPrototype.Services;
 
 namespace GradesPrototype.Views
@@ -68,7 +58,7 @@ namespace GradesPrototype.Views
                 if (student != null && !String.IsNullOrEmpty(student.UserName))
                 {
                     // Save the details of the student in the global context
-                    SessionContext.UserID = student.StudentID;
+                    SessionContext.UserID = student.StudentId;
                     SessionContext.UserRole = Role.Student;
                     SessionContext.UserName = student.UserName;
                     SessionContext.CurrentStudent = student; 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GradesPrototype.Data;
+using GradesPrototype.Services;
 
 namespace GradesPrototype.Views
 {
@@ -49,7 +51,12 @@ namespace GradesPrototype.Views
         // The MainWindow window subscribes to this event and displays the view for a single student
         private void Student_Click(object sender, RoutedEventArgs e)
         {
+            var buttonClicked = sender as Button;
+            if (buttonClicked == null)
+                return;
 
+            var buttonTag = buttonClicked.Tag.ToString();
+            StudentSelected?.Invoke(this, new StudentEventArgs(buttonTag));
         }
         #endregion
     }

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace GradesPrototype.Data
+namespace GradesPrototype42.Data
 {
     // Types of user
     public enum Role { Teacher, Student };
@@ -14,23 +10,72 @@ namespace GradesPrototype.Data
 
     public class Grade
     {
-        public int StudentID { get; set; }
+        public int StudentId { get; set; }
 
         // TODO: Exercise 2: Task 2a: Add validation to the AssessmentDate property
-        public string AssessmentDate { get; set; }
+        private string _assessmentDate;
+        public string AssessmentDate
+        {
+            get => _assessmentDate;
+            set
+            {
+                if (DateTime.TryParse(value, out var date) && date <= DateTime.Now)
+                {
+                    _assessmentDate = date.ToShortDateString();
+                }
+                else
+                {
+                    throw new ArgumentException("Date was invalid.");
+                }
+            }
+        }
         
         // TODO: Exercise 2: Task 2b: Add validation to the SubjectName property
-        public string SubjectName { get; set; }
+        private string _subjectName;
+
+        public string SubjectName
+        {
+            get => _subjectName;
+            set
+            {
+                if (DataSource.Subjects.Contains(value))
+                {
+                    _subjectName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Incorrect Subject entered.");
+                }
+
+            }
+        }
 
         // TODO: Exercise 2: Task 2c: Add validation to the Assessment property
-        public string Assessment { get; set; }
+        private string _assessment;
+
+        public string Assessment
+        {
+            get => _assessment;
+            set
+            {
+                var matchGrade = Regex.Match(value, @"[A-E][+-]?$");
+                if (matchGrade.Success)
+                {
+                    _assessment = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Grade entered was invalid.");
+                }
+            }
+        }
 
         public string Comments { get; set; }
                 
         // Constructor to initialize the properties of a new Grade
-        public Grade(int studentID, string assessmentDate, string subject, string assessment, string comments)
+        public Grade(int studentId, string assessmentDate, string subject, string assessment, string comments)
         {
-            StudentID = studentID;
+            StudentId = studentId;
             AssessmentDate = assessmentDate;
             SubjectName = subject;
             Assessment = assessment;
@@ -40,17 +85,17 @@ namespace GradesPrototype.Data
         // Default constructor
         public Grade()
         {
-            StudentID = 0;
+            StudentId = 0;
             AssessmentDate = DateTime.Now.ToString("d");
             SubjectName = "Math";
             Assessment = "A";
-            Comments = String.Empty;
+            Comments = string.Empty;
         }
     }
 
     public class Student
     {
-        public int StudentID { get; set; }
+        public int StudentId { get; set; }
         public string UserName { get; set; }
 
         private string _password = Guid.NewGuid().ToString(); // Generate a random password by default
@@ -73,7 +118,7 @@ namespace GradesPrototype.Data
         // Constructor to initialize the properties of a new Student
         public Student(int studentID, string userName, string password, string firstName, string lastName, int teacherID)
         {
-            StudentID = studentID;
+            StudentId = studentID;
             UserName = userName;
             Password = password;
             FirstName = firstName;
@@ -84,7 +129,7 @@ namespace GradesPrototype.Data
         // Default constructor 
         public Student()
         {
-            StudentID = 0;
+            StudentId = 0;
             UserName = String.Empty;
             Password = String.Empty;
             FirstName = String.Empty;

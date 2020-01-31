@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GradesPrototype.Data;
 using GradesPrototype.Services;
 using GradesPrototype.Views;
@@ -30,6 +18,8 @@ namespace GradesPrototype
             DataSource.CreateData();
 
             // TODO: Exercise 3: Task 4a: Sort the data in the Students collection
+            DataSource.Students = DataSource.Students.OrderBy(x => x.LastName).ToList();
+
             GotoLogon();
         }
 

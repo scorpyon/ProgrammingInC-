@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GradesPrototype.Data;
 using GradesPrototype.Services;
+using GradesPrototype42.Data;
 
 namespace GradesPrototype.Views
 {

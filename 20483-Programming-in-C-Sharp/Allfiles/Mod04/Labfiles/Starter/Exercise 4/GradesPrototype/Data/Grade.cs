@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using GradesPrototype.Services;
 
 namespace GradesPrototype.Data
 {
@@ -178,6 +179,15 @@ namespace GradesPrototype.Data
         }
 
         // TODO: Exercise 4: Task 2c: Add a grade to a student (the grade is already populated)
+        public void AddGrade(Grade grade)
+        {
+            if (grade.StudentID != StudentID)
+            {
+                throw new ArgumentException("Grade belongs to another student!");
+            }
+
+            grade.StudentID = StudentID;
+        }
     }
 
     public class Teacher
@@ -226,7 +236,28 @@ namespace GradesPrototype.Data
         }
 
         // TODO: Exercise 4: Task 2a: Enroll a student in the class for this teacher
+        public void EnrollInClass()
+        {
+            if (SessionContext.CurrentStudent.TeacherID > 0)
+            {
+                throw new  ArgumentException("Student is already enrolled.");
+            }
+
+            SessionContext.CurrentStudent.TeacherID = TeacherID;
+
+        }
+
 
         // TODO: Exercise 4: Task 2b: Remove a student from the class for this teacher
+        public void RemoveFromClass()
+        {
+            if (SessionContext.CurrentStudent.TeacherID != TeacherID)
+            {
+                throw new ArgumentException("Student is not enrolled with this Teacher.");
+            }
+
+            SessionContext.CurrentStudent.TeacherID = 0;
+        }
+
     }
 }

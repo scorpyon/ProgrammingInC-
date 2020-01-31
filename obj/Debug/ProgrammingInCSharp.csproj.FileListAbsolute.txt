@@ -5,3 +5,10 @@ C:\DEV\MCSA TRAINING\Programming In CSharp\ProgrammingInCSharp\obj\Debug\Program
 C:\DEV\MCSA TRAINING\Programming In CSharp\ProgrammingInCSharp\obj\Debug\ProgrammingInCSharp.csproj.CoreCompileInputs.cache
 C:\DEV\MCSA TRAINING\Programming In CSharp\ProgrammingInCSharp\obj\Debug\ProgrammingInCSharp.exe
 C:\DEV\MCSA TRAINING\Programming In CSharp\ProgrammingInCSharp\obj\Debug\ProgrammingInCSharp.pdb
+C:\DEV\MCSA TRAINING\ProgrammingInC-\bin\Debug\ProgrammingInCSharp.exe.config
+C:\DEV\MCSA TRAINING\ProgrammingInC-\bin\Debug\ProgrammingInCSharp.exe
+C:\DEV\MCSA TRAINING\ProgrammingInC-\bin\Debug\ProgrammingInCSharp.pdb
+C:\DEV\MCSA TRAINING\ProgrammingInC-\obj\Debug\ProgrammingInCSharp.csprojAssemblyReference.cache
+C:\DEV\MCSA TRAINING\ProgrammingInC-\obj\Debug\ProgrammingInCSharp.csproj.CoreCompileInputs.cache
+C:\DEV\MCSA TRAINING\ProgrammingInC-\obj\Debug\ProgrammingInCSharp.exe
+C:\DEV\MCSA TRAINING\ProgrammingInC-\obj\Debug\ProgrammingInCSharp.pdb

@@ -31,6 +31,7 @@ namespace GradesPrototype.Views
         public event EventHandler LogonSuccess;
 
         // TODO: Exercise 3: Task 1a: Define LogonFailed event
+        public event EventHandler LogonFailed;
 
         #endregion
 
@@ -39,7 +40,25 @@ namespace GradesPrototype.Views
         // TODO: Exercise 3: Task 1b: Validate the username and password against the Users collection in the MainWindow window
         private void Logon_Click(object sender, RoutedEventArgs e)
         {
-            
+            var user = username.Text;
+            var pass = password.Password;
+
+            var teacher = (DataSource.Teachers.Cast<Teacher>()
+                .Where(t => String.CompareOrdinal(t.UserName, user) == 0 && String.CompareOrdinal(t.Password, pass) == 0))
+                .FirstOrDefault();
+
+            if (teacher.UserName != null)
+            {
+                SessionContext.UserRole = Role.Teacher;
+                SessionContext.UserID = teacher.TeacherID;
+                SessionContext.UserName = teacher.UserName;
+                SessionContext.CurrentTeacher = teacher;
+                LogonSuccess?.Invoke(this, null);
+            }
+            else
+            {
+                LogonFailed?.Invoke(this, null);
+            }
         }
         #endregion
     }

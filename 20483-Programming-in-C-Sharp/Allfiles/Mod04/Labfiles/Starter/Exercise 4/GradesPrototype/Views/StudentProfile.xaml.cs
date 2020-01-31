@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GradesPrototype.Controls;
 using GradesPrototype.Data;
 using GradesPrototype.Services;
@@ -53,13 +42,58 @@ namespace GradesPrototype.Views
         // TODO: Exercise 4: Task 4a: Enable a teacher to remove a student from a class
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            if (SessionContext.UserRole != Role.Teacher)
+            {
+                return;
+            }
 
+            try
+            {
+                if (MessageBox.Show(
+                        $"Do you wish to remove {SessionContext.CurrentStudent.FirstName} {SessionContext.CurrentStudent.LastName} from the class?",
+                        "Remove student?", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
+                {
+                    return;
+                }
+
+                SessionContext.CurrentTeacher.RemoveFromClass();
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Could not remove student from class.");
+            }
         }
 
         // TODO: Exercise 4: Task 5a: Enable a teacher to add a grade to a student
         private void AddGrade_Click(object sender, RoutedEventArgs e)
         {
+            if (SessionContext.UserRole != Role.Teacher)
+            {
+                return;
+            }
 
+            try
+            {
+                var dialog = new GradeDialog();
+                if (dialog.ShowDialog() == true)
+                {
+                    var grade = new Grade()
+                    {
+                        Assessment = dialog.assessmentGrade.Text,
+                        AssessmentDate = dialog.assessmentDate.Text,
+                        Comments = dialog.comments.Text,
+                        StudentID = SessionContext.CurrentStudent.StudentID,
+                        SubjectName =  dialog.subject.Text
+                    };
+                    DataSource.Grades.Add(grade);
+                    SessionContext.CurrentStudent.AddGrade(grade);
+                    Refresh();
+                }
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Could not add grade to student.");
+            }
         }
         #endregion
 

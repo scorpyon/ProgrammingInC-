@@ -57,6 +57,19 @@ namespace GradesPrototype.Views
         public void Refresh()
         {
 
+            var matchNames = Regex.Match(SessionContext.CurrentStudent, @"([^ ]+) ([^ ]+)");
+            if (matchNames.Success)
+            {
+                var firstName = matchNames.Groups[1].Value;
+                var lastName = matchNames.Groups[2].Value;
+
+                ((TextBlock) studentName.Children[0]).Text = firstName;
+                ((TextBlock) studentName.Children[1]).Text = lastName;
+
+                btnBack.Visibility = SessionContext.UserRole == Role.Student ? Visibility.Hidden : Visibility.Visible;
+
+            }
+
         }
     }
 }

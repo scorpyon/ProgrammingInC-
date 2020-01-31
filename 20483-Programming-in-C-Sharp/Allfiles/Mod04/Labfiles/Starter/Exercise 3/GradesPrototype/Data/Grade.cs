@@ -121,7 +121,7 @@ namespace GradesPrototype.Data
     }
 
     // TODO: Exercise 3: Task 2a: Specify that the Student class implements the IComparable<Student> interface
-    public class Student
+    public class Student : IComparable<Student>
     {
         public int StudentID { get; set; }
         public string UserName { get; set; }
@@ -167,6 +167,10 @@ namespace GradesPrototype.Data
 
         // TODO: Exercise 3: Task 2b: Compare Student objects based on their LastName and FirstName properties
 
+        public int CompareTo(Student other)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Teacher
